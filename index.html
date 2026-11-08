@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubnetLab | IPv6 Subnet Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span>Subnet<span class="accent">Lab</span></span>
+    </div>
+    <span class="nav-label">IPv6 Network Calculator</span>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <span class="eyebrow">NETWORK ENGINEERING TOOLKIT</span>
+        <h1>IPv6 Subnet <span>Calculator.</span></h1>
+        <p>
+            Plan your IPv6 addressing scheme with custom subnet
+            descriptions and prefix lengths. Generate sequential
+            subnet allocations with detailed calculations.
+        </p>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading">
+            <div>
+                <h2>Network Configuration</h2>
+                <p>Define the IPv6 network you want to divide.</p>
+            </div>
+            <span class="step-badge">01</span>
+        </div>
+
+        <div class="network-grid">
+            <div class="field">
+                <label for="networkAddress">
+                    IPv6 Network Address
+                </label>
+                <input
+                    type="text"
+                    id="networkAddress"
+                    value="2001:db8:abcd::"
+                    placeholder="2001:db8:abcd::"
+                    spellcheck="false"
+                >
+            </div>
+
+            <div class="field">
+                <label for="networkPrefix">
+                    Base Network Prefix
+                </label>
+                <select id="networkPrefix"></select>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading">
+            <div>
+                <h2>Subnet Requirements</h2>
+                <p>
+                    Enter a description and required prefix for
+                    each subnet. Larger address blocks are
+                    automatically allocated first.
+                </p>
+            </div>
+            <span class="step-badge">02</span>
+        </div>
+
+        <div class="subnet-header">
+            <span>SUBNET DESCRIPTION</span>
+            <span>REQUIRED PREFIX</span>
+            <span></span>
+        </div>
+
+        <div id="subnetInputs"></div>
+
+        <button id="addSubnetBtn" class="add-btn" type="button">
+            + Add Another Subnet
+        </button>
+
+        <p class="helper-text">
+            Tip: /64 is commonly used for LANs, while /127
+            is used for point-to-point router links.
+        </p>
+    </section>
+
+    <div class="action-bar">
+        <button id="resetBtn" class="reset-btn" type="button">
+            Reset
+        </button>
+        <button id="calculateBtn" class="calculate-btn" type="button">
+            Calculate IPv6 Subnets →
+        </button>
+    </div>
+
+    <div id="errorMessage" class="error-message" role="alert"></div>
+
+    <section id="resultsSection" class="results-section hidden">
+
+        <div class="results-heading">
+            <div>
+                <span class="eyebrow">CALCULATION COMPLETE</span>
+                <h2>Your IPv6 Subnetting Results</h2>
+                <p>
+                    Subnets are allocated from largest to smallest
+                    address block.
+                </p>
+            </div>
+
+            <button id="exportBtn" class="export-btn" type="button">
+                ↓ Export CSV
+            </button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>Total Subnets</span>
+                <strong id="totalSubnets">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Allocated Addresses</span>
+                <strong id="allocatedAddresses">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Remaining Addresses</span>
+                <strong id="remainingAddresses">0</strong>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subnet Description</th>
+                        <th>CIDR</th>
+                        <th>Subnet Network</th>
+                        <th>First Address</th>
+                        <th>Last Address</th>
+                        <th>Address Count</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody"></tbody>
+            </table>
+        </div>
+
+        <div class="section-heading explanation-heading">
+            <div>
+                <h2>Step-by-Step Solution</h2>
+                <p>Learn how each IPv6 subnet was allocated.</p>
+            </div>
+            <span class="step-badge">03</span>
+        </div>
+
+        <div id="explanationContainer"></div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>SubnetLab — IPv6 Subnet Calculator</p>
+    <p>Built with HTML, CSS & JavaScript</p>
+</footer>
+
+</body>
+</html>
